@@ -30,7 +30,6 @@ import hashlib
 from .libs.base58 import (
     check_encode, checksum_encode, check_decode, ensure_string
 )
-from .providers import HTTP_PROVIDER
 from .signature import (
     sign, verify
 )
@@ -63,7 +62,8 @@ class Wallet:
     :returns: Wallet -- Wallet instance.
     """
 
-    def __init__(self, provider: Union[HTTPProvider, WebsocketProvider] = HTTP_PROVIDER, use_default_path: bool = False):
+    def __init__(self, provider: Union[HTTPProvider, WebsocketProvider] = config["providers"]["http"],
+                 use_default_path: bool = False):
 
         self._provider: Union[HTTPProvider, WebsocketProvider] = provider
         self._use_default_path: bool = use_default_path
@@ -102,8 +102,8 @@ class Wallet:
 
         :returns: Wallet -- Wallet instance.
 
+        >>> from pyxdc import WEBSOCKET_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import WEBSOCKET_PROVIDER
         >>> wallet: Wallet = Wallet(provider=WEBSOCKET_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e", language="english", passphrase=None)
         <pyxdc.wallet.Wallet object at 0x000001E8BFB98D60>
@@ -137,8 +137,8 @@ class Wallet:
 
         :returns: Wallet -- Wallet instance.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_mnemonic(mnemonic="rent host ill marble fortune deputy pink absorb stand thought neck planet away found robust", passphrase=None)
         <pyxdc.wallet.Wallet object at 0x000001E8BFB98D60>
@@ -164,8 +164,8 @@ class Wallet:
 
         :returns: Wallet -- Wallet instance.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_seed(seed="09d6f96646d69b3842eecb8f05737972c6c0314d60c203657ae2dad5e8dd88797019ad9938292307de2f4a74018d8797324abab779432eb428aea1855694156b")
         <pyxdc.wallet.Wallet object at 0x000001E8BFB98D60>
@@ -195,8 +195,8 @@ class Wallet:
 
         :returns: Wallet -- Wallet instance.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_root_xprivate_key(root_xprivate_key="xprv9s21ZrQH143K3i9qWtfiAawwn2iLAcKKfXHCsTdUsy7RYsAma9qzrrwEwsu9buLocH7qFQmTow5bSysKDmq8VB3hYPQgMTmXAfdmhNdRZYz")
         <pyxdc.wallet.Wallet object at 0x000001E8BFB98D60>
@@ -225,8 +225,8 @@ class Wallet:
 
         :returns: Wallet -- Wallet instance.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_xprivate_key(xprivate_key="xprvA2oDuneWodkNiecDi8VoBCvu7TSfnDmGqr5oKzkkLWvmE9dm1TQzYcp9HZQLqYTep1T3yykxZgiUSJDZYrvnnL1txNUd3o2y1A1t5xz3d8H")
         <pyxdc.wallet.Wallet object at 0x000001E8BFB98D60>
@@ -253,8 +253,8 @@ class Wallet:
 
         :returns: Wallet -- Wallet instance.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_wif(wif="KySR2sF6eTQyYRr3SW12jm5KPycKmgQ9SGUJ7oBQPf1SnvuvJTat")
         <pyxdc.wallet.Wallet object at 0x000001E8BFB98D60>
@@ -279,8 +279,8 @@ class Wallet:
 
         :returns: Wallet -- Wallet instance.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_private_key(private_key="4235d9ffc246d488d527177b654e7dd5c02f5c5abc2e2054038d6825224a24de")
         <pyxdc.wallet.Wallet object at 0x000001E8BFB98D60>
@@ -301,8 +301,8 @@ class Wallet:
 
         :returns: Wallet -- Wallet instance.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_root_xprivate_key(root_xprivate_key="xprv9s21ZrQH143K3i9qWtfiAawwn2iLAcKKfXHCsTdUsy7RYsAma9qzrrwEwsu9buLocH7qFQmTow5bSysKDmq8VB3hYPQgMTmXAfdmhNdRZYz")
         >>> wallet.from_path(path="m/44'/550'/'0/0/0")
@@ -332,8 +332,8 @@ class Wallet:
 
         :returns: Wallet -- Wallet instance.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_root_xprivate_key(root_xprivate_key="xprv9s21ZrQH143K3i9qWtfiAawwn2iLAcKKfXHCsTdUsy7RYsAma9qzrrwEwsu9buLocH7qFQmTow5bSysKDmq8VB3hYPQgMTmXAfdmhNdRZYz")
         >>> wallet.from_index(index=44, hardened=True)
@@ -424,8 +424,8 @@ class Wallet:
 
         :returns: str -- Root XPrivate Key.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/'0/0/0")
@@ -456,8 +456,8 @@ class Wallet:
 
         :returns: str -- Root XPublic Key.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/'0/0/0")
@@ -488,8 +488,8 @@ class Wallet:
 
         :returns: str -- Root XPrivate Key.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -518,8 +518,8 @@ class Wallet:
 
         :returns: str -- XPublic Key.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -545,8 +545,8 @@ class Wallet:
 
         :returns: Wallet -- Wallet instance.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_root_xprivate_key(root_xprivate_key="xprv9s21ZrQH143K3i9qWtfiAawwn2iLAcKKfXHCsTdUsy7RYsAma9qzrrwEwsu9buLocH7qFQmTow5bSysKDmq8VB3hYPQgMTmXAfdmhNdRZYz")
         >>> wallet.from_path(path="m/44'/550'/'0/0/0")
@@ -573,8 +573,8 @@ class Wallet:
 
         :returns: str -- Uncommpresed public key.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -590,8 +590,8 @@ class Wallet:
 
         :returns: str -- Commpresed public key.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -613,8 +613,8 @@ class Wallet:
 
         :returns: str -- Private key.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -630,8 +630,8 @@ class Wallet:
 
         :returns: str -- Public key.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -658,8 +658,8 @@ class Wallet:
 
         :returns: int -- Entropy strength.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.strength()
@@ -674,8 +674,8 @@ class Wallet:
 
         :returns: str -- Entropy hex string.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.entropy()
@@ -690,8 +690,8 @@ class Wallet:
 
         :returns: str -- Mnemonic words.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.mnemonic()
@@ -706,8 +706,8 @@ class Wallet:
 
         :returns: str -- Entopy/Mnemonic passphrase.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e", passphrase="meherett")
         >>> wallet.passphrase()
@@ -722,8 +722,8 @@ class Wallet:
 
         :returns: str -- Mnemonic language.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.language()
@@ -738,8 +738,8 @@ class Wallet:
 
         :returns: str -- Seed hex string.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -755,8 +755,8 @@ class Wallet:
 
         :returns: str -- Drivation path.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -772,8 +772,8 @@ class Wallet:
 
         :returns: str -- Chain code.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -790,8 +790,8 @@ class Wallet:
 
         :returns: str -- Extended semantic.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -807,8 +807,8 @@ class Wallet:
 
         :returns: str -- Identifier/Hash.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -826,8 +826,8 @@ class Wallet:
 
         :returns: str -- Finger print.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -843,8 +843,8 @@ class Wallet:
 
         :returns: str -- XinFin Address.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -863,8 +863,8 @@ class Wallet:
 
         :returns: str -- Wallet Important Format.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -881,8 +881,8 @@ class Wallet:
 
         :return: int -- XinFin balance (Wei).
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")
@@ -901,8 +901,8 @@ class Wallet:
 
         :return: str -- Signed message data (signature).
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> message = "1246b84985e1ab5f83f4ec2bdf271114666fd3d9e24d12981a3c861b9ed523c6"
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
@@ -924,8 +924,8 @@ class Wallet:
 
         :return: bool -- Verified signature (True/False).
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> message = "1246b84985e1ab5f83f4ec2bdf271114666fd3d9e24d12981a3c861b9ed523c6"
         >>> signature = "9c3a1322cab0e70147c85e47bdc3ce7d719130b70857bb7ac633e9bd7a76f3b8d76eddd83f1a5d229a34491b7e26aaae21a091920b12ce81c618cbb1f5accf4a"
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
@@ -943,8 +943,8 @@ class Wallet:
 
         :returns: dict -- All Wallet imformations.
 
+        >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
-        >>> from pyxdc.providers import HTTP_PROVIDER
         >>> wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
         >>> wallet.from_entropy(entropy="b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e")
         >>> wallet.from_path(path="m/44'/550'/0'/0/0")

@@ -10,7 +10,6 @@ from typing import (
 import requests
 import json
 
-from .providers import HTTP_PROVIDER
 from .utils import (
     amount_unit_converter, is_address, to_checksum_address
 )
@@ -20,7 +19,7 @@ from .exceptions import (
 from .config import config
 
 
-def get_balance(address: str, provider: Union[HTTPProvider, WebsocketProvider] = HTTP_PROVIDER) -> int:
+def get_balance(address: str, provider: Union[HTTPProvider, WebsocketProvider] = config["providers"]["http"]) -> int:
     """
     Get XinFin balance.
 
@@ -31,8 +30,8 @@ def get_balance(address: str, provider: Union[HTTPProvider, WebsocketProvider] =
 
     :returns: int -- XinFin balance (Wei).
 
+    >>> from pyxdc import HTTP_PROVIDER
     >>> from pyxdc.rpc import get_balance
-    >>> from pyxdc.providers import HTTP_PROVIDER
     >>> get_balance(address="xdc70c1eb09363603a3b6391deb2daa6d2561a62f52", provider=HTTP_PROVIDER)
     71560900
     """

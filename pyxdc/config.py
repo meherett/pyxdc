@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
 
+from web3 import (
+    HTTPProvider, WebsocketProvider
+)
+
 # XinFin - XDC configuration
 config: dict = {
     "hardened": 0x80000000,
     "extended_private_key": 0x0488ade4,
     "extended_public_key": 0x0488b21e,
     "providers": {
-      "http": "https://rpc.xinfin.network",
-      "websocket": "wss://ws.xinfin.network"
+      "http": HTTPProvider(
+          endpoint_uri="https://rpc.xinfin.network"
+      ),
+      "websocket": WebsocketProvider(
+          endpoint_uri="wss://ws.xinfin.network"
+      )
     },
     "timeout": 60,
     "units": {
