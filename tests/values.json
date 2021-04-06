@@ -1,0 +1,108 @@
+{
+  "utils": {
+    "entropy's": [
+      {
+        "length": 32,
+        "strength": 128,
+        "entropy": "2c092549a74b66e59d0759ae10449e21"
+      },
+      {
+        "length": 40,
+        "strength": 160,
+        "entropy": "3cc90cb4cd18e4924c5dde0bd7e067e474685af0"
+      },
+      {
+        "length": 48,
+        "strength": 192,
+        "entropy": "dc0f65e6b0776d03f6b0f60a1961f9c821dc6cc12e015e67"
+      },
+      {
+        "length": 56,
+        "strength": 224,
+        "entropy": "fe919b9dfe1d8cce1ad041ec1d879d359bd25ee1391b6ab47ddbd1c4"
+      },
+      {
+        "length": 64,
+        "strength": 256,
+        "entropy": "794ce74ecb529a94feb270dc095cf4f6aa791dbdd9831402fac02ada9f6a003d"
+      }
+    ],
+    "mnemonics": [
+      {
+        "strength": 128,
+        "language": "english",
+        "mnemonic": "essay mammal later conduct cinnamon bunker target flower gold you report auto",
+        "words": 12
+      },
+      {
+        "strength": 160,
+        "language": "chinese_simplified",
+        "mnemonic": "散 残 争 坯 抗 泽 决 党 估 沈 插 系 货 麻 陈",
+        "words": 15
+      },
+      {
+        "strength": 192,
+        "language": "french",
+        "mnemonic": "demander émouvoir séance plaisir vernir luron élaborer nerveux fourmi courage viaduc persil innocent sternum fugitif jardin franchir indice",
+        "words": 18
+      },
+      {
+        "strength": 224,
+        "language": "italian",
+        "mnemonic": "umorismo terzetto trattato nebulosa serata anca pezzo debutto regalato luppolo arabica cuculo falco sradicare bibita parola oggetto salasso gazebo pertugio bibita",
+        "words": 21
+      },
+      {
+        "strength": 256,
+        "language": "japanese",
+        "mnemonic": "おくる きそう おとしもの きけんせい よそう さこく きはく てまえ えいご えんぜつ あつまり めいさい しのぐ さくら こんすい せんやく あおぞら せっぱん きうん さとおや すんぽう ないこう だっきゃく たよる",
+        "words": 24
+      },
+      {
+        "strength": 160,
+        "language": "chinese_traditional",
+        "mnemonic": "枝 走 翻 巧 棋 核 溝 悟 庭 抬 毅 際 姆 林 拔",
+        "words": 15
+      },
+      {
+        "strength": 192,
+        "language": "korean",
+        "mnemonic": "부문 친척 간부 금요일 행운 수동적 차림 증세 정지 책임 그날 표면 망원경 넷째 비빔밥 고장 강당 냉장고",
+        "words": 18
+      },
+      {
+        "strength": 224,
+        "language": "spanish",
+        "mnemonic": "mamá odisea flecha oído queja recurso cárcel lacra curva ancla olla fresa espada olvido tractor asegurar hombre pausa marrón carpeta arder",
+        "words": 21
+      }
+    ]
+  },
+  "wallet": {
+    "strength": 160,
+    "entropy": "915063bf89c24d894215695b2a27a0990b2fee2c",
+    "mnemonic": "열쇠 아직 한글 관광 날개 주머니 건물 일찍 비바람 보관 평가 대형 잠자리 현지 장기간",
+    "language": "korean",
+    "passphrase": null,
+    "seed": "2a07bafbe8293637db171afe8b9fdfa3028f53c92f32343fdc62c81d62a89e5c2b59e2901b5a9f4c01939a279cc4286a2bd1612fad099e89754d4a93777c0aa7",
+    "root_xprivate_key": "xprv9s21ZrQH143K2HGD7u7dFN5Z3jPSLRSAY2dxggQjiDKfQSuh1zeVMD2uwqfSw86qfBUsmq8ppe72VSH4aFCCHJ33dyCXGHTSTTLNRbsnAiL",
+    "root_xprivate_key_hex": "0488ade400000000000000000016598891f1403573c72f3659d99d1be8eca476dad5095adfb6c9a9da405777db00c53cc85f0a788fa19f85eee2d3d383b9e495a059646bb4373d53f0c8747e1550",
+    "root_xpublic_key": "xpub661MyMwAqRbcEmLgDvedcW2HbmDvjtA1uFZZV4pMGYreHFEqZXxju1MPo8PUBRRA9mMbbMfctiMNqfmN5ZUuQwczJJHmUi61r17c41yTnjX",
+    "root_xpublic_key_hex": "0488b21e00000000000000000016598891f1403573c72f3659d99d1be8eca476dad5095adfb6c9a9da405777db03a45686f24d36298fb6a2c4da77b8d93e089d529e49fc14742edf8b29f09be9eb",
+    "xprivate_key": "xprvA3EQ3FPUuR4iLzWgLWs1ob2ZqjbpwXbAvtrrdf9XNHixPtwiTHgCjehn5eunbdvmVohf3GdAgHG2HLfRNuzHRYPngJjQEUNsGrLM51xY4br",
+    "xprivate_key_hex": "0488ade4056d916b9400000000aea0ba732a351b4481d023caaf0d8ca258dceeb4415612c6df751d40d240f07200856719d78f4d061bd57361efdaffbcd941d0370a9012a4b53b0ecc158e83279a",
+    "xpublic_key": "xpub6GDkSkvNjnd1ZUb9SYQ2AiyJPmSKLzK2J7nTS3Z8vdFwGhGrzpzTHT2FvwacvUZDPoaqPQvLAaeTnvyBbNsxCNJwZJPPM1VNHbG654aWi9w",
+    "xpublic_key_hex": "0488b21e056d916b9400000000aea0ba732a351b4481d023caaf0d8ca258dceeb4415612c6df751d40d240f072035d438c9c6f38cec745a3657531925467fad1cd8e75861e0fd9122b345b1b8681",
+    "uncompressed": "5d438c9c6f38cec745a3657531925467fad1cd8e75861e0fd9122b345b1b8681f965b9c90c02c5d7f7c3d1967341991df943618e0875ac18248febf62be23997",
+    "compressed": "035d438c9c6f38cec745a3657531925467fad1cd8e75861e0fd9122b345b1b8681",
+    "chain_code": "aea0ba732a351b4481d023caaf0d8ca258dceeb4415612c6df751d40d240f072",
+    "private_key": "856719d78f4d061bd57361efdaffbcd941d0370a9012a4b53b0ecc158e83279a",
+    "public_key": "035d438c9c6f38cec745a3657531925467fad1cd8e75861e0fd9122b345b1b8681",
+    "wif": "L1h2bhL4hUyj63467FnSDovfL8jfu7YT3Jp1AFMoA69HXmYrKW9D",
+    "finger_print": "27cb1d48",
+    "semantic": "p2pkh",
+    "path": "m/44'/550'/0'/0/0",
+    "hash": "27cb1d485bcfe211a0078d54274056d59015d2b7",
+    "address": "xdcAF78a3fc5FEf31F374910873D9A8fc70d2F193f8"
+  }
+}
