@@ -18,6 +18,7 @@ config: dict = {
       )
     },
     "timeout": 60,
+    "gas_price": 250_000_000,
     "units": {
         "XDC": 1,
         "Gwei": 1_000_000_000,
