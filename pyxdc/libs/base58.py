@@ -11,10 +11,10 @@ __base58_alphabet_bytes = b"123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrst
 __base58_radix = len(__base58_alphabet)
 
 
-def checksum_encode(address, crypto="eth"):
+def checksum_encode(address, prefix="xdc"):
     out = ""
     keccak = sha3.keccak_256()
-    addr = address.lower().replace("0x", "") if crypto == "eth" else address.lower().replace("xdc", "")
+    addr = address.lower().replace(prefix, "")
     keccak.update(addr.encode("ascii"))
     hash_addr = keccak.hexdigest()
     for i, c in enumerate(addr):
@@ -22,7 +22,7 @@ def checksum_encode(address, crypto="eth"):
             out += c.upper()
         else:
             out += c
-    return ("0x" + out) if crypto == "eth" else ("xdc" + out)
+    return prefix + out
 
 
 def string_to_int(data):
