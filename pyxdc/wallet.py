@@ -837,7 +837,7 @@ class Wallet:
 
         return self.hash(self.private_key())[:8]
 
-    def address(self) -> str:
+    def address(self, prefix: str = "xdc") -> str:
         """
         Get Address.
 
@@ -855,7 +855,7 @@ class Wallet:
         keccak_256 = sha3.keccak_256()
         keccak_256.update(self._verified_key.to_string())
         address = keccak_256.hexdigest()[24:]
-        return checksum_encode(address, crypto="xdc")
+        return checksum_encode(address, prefix=prefix)
 
     def wif(self) -> str:
         """
