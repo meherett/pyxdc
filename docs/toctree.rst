@@ -13,5 +13,7 @@ PyXDC
     :caption: API's
 
     wallet.rst
+    rpc.rst
+    transaction.rst
     signature.rst
     utils.rst
