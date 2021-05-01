@@ -5,17 +5,16 @@ from binascii import (
 )
 from sha3 import keccak_256
 
-import ecdsa
 import hmac
 import hashlib
 
 
 from typing import (
-    Any, Callable, Tuple
+    Any, Callable, Optional, Tuple
 )
 from eth_keys.utils.padding import pad32
 from eth_utils import (
-    big_endian_to_int, int_to_big_endian
+    big_endian_to_int, int_to_big_endian, curried
 )
 from eth_keys.validation import (
     validate_recoverable_signature_bytes,
@@ -217,52 +216,77 @@ def decompress_public_key(compressed_public_key_bytes: bytes) -> bytes:
     return encode_raw_public_key((x, y))
 
 
-def sign(private_key: str, message: str) -> str:
+def sign(private_key: str, message: Optional[str] = None, message_hash: Optional[str] = None) -> str:
     """
     Sign XinFin message data by private key.
 
     :param private_key: XinFin private key.
     :type private_key: str.
-    :param message: Message data.
+    :param message: Message data, default to None.
     :type message: str.
+    :param message_hash: Message data hash, default to None.
+    :type message_hash: str.
 
     :return: str -- XinFin signed message or signature.
 
     >>> from pyxdc.signature import sign
-    >>> sign(private_key="4235d9ffc246d488d527177b654e7dd5c02f5c5abc2e2054038d6825224a24de", message="1246b84985e1ab5f83f4ec2bdf271114666fd3d9e24d12981a3c861b9ed523c6")
-    "2a6f2584b6d20f06c23c9e12248f9fdd5d17d1fe973ea2485050b082c35030495a598e2aa1af37d9672db51c6700e6bbc7c2a33b6a1f4eac92d8500cc161affe"
+    >>> sign(private_key="4235d9ffc246d488d527177b654e7dd5c02f5c5abc2e2054038d6825224a24de", message="meherett")
+    "74ad07a84b87fa3efa2f0e825506fb8bbee41021ca77a30e8ffa2bd66d47d99917d4a0587185e78a051a9cb80ebf65c7d62dbeedb7f9a029f961d70b52a10dc001"
+    >>> sign(private_key="4235d9ffc246d488d527177b654e7dd5c02f5c5abc2e2054038d6825224a24de", message_hash="4bbbfd0c33fea618f4a9aa75c02fe76e50fa59798af021bc34f7856f3259c685")
+    "74ad07a84b87fa3efa2f0e825506fb8bbee41021ca77a30e8ffa2bd66d47d99917d4a0587185e78a051a9cb80ebf65c7d62dbeedb7f9a029f961d70b52a10dc001"
     """
 
-    signing_key: ecdsa.SigningKey = ecdsa.SigningKey.from_string(
-        unhexlify(private_key), curve=ecdsa.SECP256k1
-    )
-    keccak_256_message = keccak_256()
-    keccak_256_message.update(message.encode())
+    if message:
+        message_bytes = curried.to_bytes(primitive=None, hexstr=None, text=message)
+        msg_length = str(len(message_bytes)).encode('utf-8')
+        joined = b'\x19' + b'E' + b'thereum Signed Message:\n' + msg_length + message_bytes
+        keccak_256_message = keccak_256()
+        keccak_256_message.update(joined)
+        message_hash = keccak_256_message.digest()
+    elif message_hash:
+        message_hash = unhexlify(message_hash)
+    else:
+        raise ValueError("Message data or hash is required to sign.")
+
     return ecdsa_raw_sign(
-        msg_hash=keccak_256_message.digest(), private_key_bytes=unhexlify(private_key)
+        msg_hash=message_hash, private_key_bytes=unhexlify(private_key)
     ).hex()
 
 
-def verify(public_key: str, message: str, signature: str) -> bool:
+def verify(public_key: str, signature: str, message: Optional[str] = None, message_hash: Optional[str] = None) -> bool:
     """
     Verify XinFin signature by public key.
 
     :param public_key: XinFin public key.
     :type public_key: str.
-    :param message: Message data.
-    :type message: str.
     :param signature: Signed message data.
     :type signature: str.
+    :param message: Message data, default to None.
+    :type message: str.
+    :param message_hash: Message data hash, default to None.
+    :type message_hash: str.
 
     :return: bool -- Verified signature.
 
     >>> from pyxdc.signature import verify
-    >>> verify(public_key="03d8799336beacc6b2e7f86f46bce4ad5cabf1ec7a0d6241416985e3b29fe1cc85", message="1246b84985e1ab5f83f4ec2bdf271114666fd3d9e24d12981a3c861b9ed523c6", signature="2a6f2584b6d20f06c23c9e12248f9fdd5d17d1fe973ea2485050b082c35030495a598e2aa1af37d9672db51c6700e6bbc7c2a33b6a1f4eac92d8500cc161affe")
+    >>> verify(public_key="03d8799336beacc6b2e7f86f46bce4ad5cabf1ec7a0d6241416985e3b29fe1cc85", message="meherett", signature="74ad07a84b87fa3efa2f0e825506fb8bbee41021ca77a30e8ffa2bd66d47d99917d4a0587185e78a051a9cb80ebf65c7d62dbeedb7f9a029f961d70b52a10dc001")
+    True
+    >>> verify(public_key="03d8799336beacc6b2e7f86f46bce4ad5cabf1ec7a0d6241416985e3b29fe1cc85", message_hash="4bbbfd0c33fea618f4a9aa75c02fe76e50fa59798af021bc34f7856f3259c685", signature="74ad07a84b87fa3efa2f0e825506fb8bbee41021ca77a30e8ffa2bd66d47d99917d4a0587185e78a051a9cb80ebf65c7d62dbeedb7f9a029f961d70b52a10dc001")
     True
     """
 
-    keccak_256_message = keccak_256()
-    keccak_256_message.update(message.encode())
+    if message:
+        message_bytes = curried.to_bytes(primitive=None, hexstr=None, text=message)
+        msg_length = str(len(message_bytes)).encode('utf-8')
+        joined = b'\x19' + b'E' + b'thereum Signed Message:\n' + msg_length + message_bytes
+        keccak_256_message = keccak_256()
+        keccak_256_message.update(joined)
+        message_hash = keccak_256_message.digest()
+    elif message_hash:
+        message_hash = unhexlify(message_hash)
+    else:
+        raise ValueError("Message data or hash is required to sign.")
+
     signature = unhexlify(signature)
     validate_recoverable_signature_bytes(signature)
     r = big_endian_to_int(signature[0:32])
@@ -270,6 +294,7 @@ def verify(public_key: str, message: str, signature: str) -> bool:
     v = ord(signature[64:65])
     validate_compressed_public_key_bytes(unhexlify(public_key))
     uncompressed_public_key = decompress_public_key(unhexlify(public_key))
+
     return ecdsa_raw_verify(
-        msg_hash=keccak_256_message.digest(), rs=(r, s), public_key_bytes=uncompressed_public_key
+        msg_hash=message_hash, rs=(r, s), public_key_bytes=uncompressed_public_key
     )

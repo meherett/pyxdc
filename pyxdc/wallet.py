@@ -892,12 +892,14 @@ class Wallet:
 
         return get_balance(address=self.address(), provider=self._provider)
 
-    def sign(self, message: str) -> str:
+    def sign(self, message: Optional[str] = None, message_hash: Optional[str] = None) -> str:
         """
         Sign message data by private key.
 
-        :param message: Message data.
+        :param message: Message data, default to None.
         :type message: str.
+        :param message_hash: Message data hash, default to None.
+        :type message_hash: str.
 
         :return: str -- Signed message data (signature).
 
@@ -911,16 +913,18 @@ class Wallet:
         "9c3a1322cab0e70147c85e47bdc3ce7d719130b70857bb7ac633e9bd7a76f3b8d76eddd83f1a5d229a34491b7e26aaae21a091920b12ce81c618cbb1f5accf4a"
         """
 
-        return sign(private_key=self.private_key(), message=message)
+        return sign(private_key=self.private_key(), message=message, message_hash=message_hash)
 
-    def verify(self, message: str, signature: str) -> bool:
+    def verify(self, signature: str, message: Optional[str] = None, message_hash: Optional[str] = None) -> bool:
         """
         Verify signature by public key.
 
-        :param message: Message data.
-        :type message: str.
         :param signature: Signed message data.
         :type signature: str.
+        :param message: Message data, default to None.
+        :type message: str.
+        :param message_hash: Message data hash, default to None.
+        :type message_hash: str.
 
         :return: bool -- Verified signature (True/False).
 
@@ -935,7 +939,7 @@ class Wallet:
         True
         """
 
-        return verify(public_key=self.public_key(), message=message, signature=signature)
+        return verify(public_key=self.public_key(), signature=signature, message=message, message_hash=message_hash)
 
     def dumps(self) -> dict:
         """
