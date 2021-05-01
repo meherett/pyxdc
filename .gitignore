@@ -1,10 +1,16 @@
+# Files stuff
+.coverage
+make.bat
+Makefile
+
+# Folders stuff
+experiment/
 .idea/
 .tox/
 
 # Setuptools stuff
 build/
 dist/
-experiment/
 pyxdc.egg-info/
 
 # Python stuff
@@ -12,5 +18,3 @@ __pycache__/
 
 # py.test stuff
 .pytest_cache/
-
-.coverage
