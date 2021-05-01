@@ -9,11 +9,11 @@ from .config import config
 config: dict = config
 
 # XinFin providers
-HTTP_PROVIDER, WEBSOCKET_PROVIDER = (
-    config["providers"]["http"], config["providers"]["websocket"]
+HTTP_PROVIDER, WEBSOCKET_PROVIDER, DEFAULT_PATH = (
+    config["providers"]["http"], config["providers"]["websocket"], config["path"]
 )
 
 
 __all__: List[str] = [
-    "Wallet", "HTTP_PROVIDER", "WEBSOCKET_PROVIDER"
+    "Wallet", "HTTP_PROVIDER", "WEBSOCKET_PROVIDER", "DEFAULT_PATH"
 ]
