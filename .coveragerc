@@ -1,2 +1,4 @@
 [run]
 omit = pyxdc/libs/*
+       pyxdc/account.py
+       pyxdc/log.py
