@@ -18,8 +18,8 @@ def test_from_entropy():
 
     wallet: Wallet = Wallet(
         provider=HTTP_PROVIDER
-    ).from_private_key(
-        private_key=_["wallet"]["private_key"]
+    ).from_wif(
+        wif=_["wallet"]["wif"]
     )
 
     assert wallet.strength() is None

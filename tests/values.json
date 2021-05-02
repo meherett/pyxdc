@@ -103,6 +103,7 @@
     "semantic": "p2pkh",
     "path": "m/44'/550'/0'/0/0",
     "hash": "27cb1d485bcfe211a0078d54274056d59015d2b7",
-    "address": "xdcAF78a3fc5FEf31F374910873D9A8fc70d2F193f8"
+    "address_xdc": "xdcAF78a3fc5FEf31F374910873D9A8fc70d2F193f8",
+    "address_0x": "0xAF78a3fc5FEf31F374910873D9A8fc70d2F193f8"
   }
 }
