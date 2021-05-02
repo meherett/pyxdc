@@ -195,7 +195,7 @@ def is_address(address: str) -> bool:
     if not isinstance(address, str):
         raise TypeError("Address must be string format")
     elif address.startswith("xdc"):
-        return Web3.isAddress(f"0x{address.lstrip('xdc')}")
+        return Web3.isAddress(f"0x{address.replace('xdc', '', 1)}")
     elif address.startswith("0x"):
         return Web3.isAddress(address)
     return False
@@ -220,7 +220,7 @@ def is_checksum_address(address: str) -> bool:
     if not isinstance(address, str):
         raise TypeError("Address must be string format")
     elif address.startswith("xdc"):
-        return Web3.isChecksumAddress(f"0x{address.lstrip('xdc')}")
+        return Web3.isChecksumAddress(f"0x{address.replace('xdc', '', 1)}")
     elif address.startswith("0x"):
         return Web3.isAddress(address)
     return False
@@ -246,7 +246,7 @@ def to_checksum_address(address: str, prefix: str = "xdc") -> str:
         raise AddressError("Invalid XinFin address.")
 
     if address.startswith("xdc"):
-        checksum_address: str = Web3.toChecksumAddress(f"0x{address.lstrip('xdc')}")
+        checksum_address: str = Web3.toChecksumAddress(f"0x{address.replace('xdc', '', 1)}")
     elif address.startswith("0x"):
         checksum_address: str = Web3.toChecksumAddress(address)
     else:
@@ -276,7 +276,7 @@ def decode_transaction_raw(transaction_raw: str) -> dict:
     class Transaction(rlp.Serializable):
         fields: list = [
             ("nonce", big_endian_int),
-            ("gasPrice", big_endian_int),
+            ("gas_price", big_endian_int),
             ("gas", big_endian_int),
             ("to", Binary.fixed_length(20, allow_empty=True)),
             ("value", big_endian_int),
@@ -296,10 +296,10 @@ def decode_transaction_raw(transaction_raw: str) -> dict:
         "to": (w3.toChecksumAddress(transaction.to) if transaction.to else None),
         "nonce": transaction.nonce,
         "gas": transaction.gas,
-        "gasPrice": transaction.gasPrice,
+        "gas_price": transaction.gas_price,
         "value": transaction.value,
         "data": w3.toHex(transaction.data),
-        "chainId": ((transaction.v - 35) // 2 if transaction.v % 2 else (transaction.v - 36) // 2),
+        "chain_id": ((transaction.v - 35) // 2 if transaction.v % 2 else (transaction.v - 36) // 2),
         "r": hex(transaction.r),
         "s": hex(transaction.s),
         "v": transaction.v
