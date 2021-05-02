@@ -18,15 +18,14 @@ config: dict = {
       )
     },
     "timeout": 60,
-    "gas_price": 250_000_000,
+    "gas_price": 250_000_000,  # 0.25 Gwei
     "units": {
         "XDC": 1,
         "Gwei": 1_000_000_000,
         "Wei": 1_000_000_000_000_000_000
     },
     "coin_type": 550,
-    "path": "m/44/550/1/0/1",
-    "fee": 10_000_000,
+    "path": "m/44'/550'/0'/0/0",
     "wif": 0x80,
     "headers": {
         "User-Agent": "PyXDC User-Agent v0.1.0",
