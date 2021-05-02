@@ -13,8 +13,10 @@ values = open(file_path, "r", encoding="utf-8")
 _ = json.loads(values.read())
 values.close()
 
+MESSAGE: str = "meherett"
 
-def test_from_entropy():
+
+def test_from_mnemonic():
 
     wallet: Wallet = Wallet(
         provider=HTTP_PROVIDER
@@ -55,6 +57,6 @@ def test_from_entropy():
     assert isinstance(wallet.dumps(), dict)
     # assert isinstance(wallet.balance(unit="XDC"), float)
 
-    signature: str = wallet.sign(message="meherett")
+    signature: str = wallet.sign(message=MESSAGE)
     assert isinstance(signature, str)
-    assert wallet.verify(signature=signature, message="meherett")
+    assert wallet.verify(signature=signature, message=MESSAGE)

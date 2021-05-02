@@ -13,8 +13,10 @@ values = open(file_path, "r", encoding="utf-8")
 _ = json.loads(values.read())
 values.close()
 
+MESSAGE_HASH: str = "4bbbfd0c33fea618f4a9aa75c02fe76e50fa59798af021bc34f7856f3259c685"
 
-def test_from_entropy():
+
+def test_from_xprivate_key():
 
     wallet: Wallet = Wallet(
         provider=HTTP_PROVIDER
@@ -51,6 +53,6 @@ def test_from_entropy():
     assert isinstance(wallet.dumps(), dict)
     # assert isinstance(wallet.balance(unit="XDC"), float)
 
-    signature: str = wallet.sign(message="meherett")
+    signature: str = wallet.sign(message_hash=MESSAGE_HASH)
     assert isinstance(signature, str)
-    assert wallet.verify(signature=signature, message="meherett")
+    assert wallet.verify(signature=signature, message_hash=MESSAGE_HASH)
