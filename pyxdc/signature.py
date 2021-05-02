@@ -222,9 +222,9 @@ def sign(private_key: str, message: Optional[str] = None, message_hash: Optional
 
     :param private_key: XinFin private key.
     :type private_key: str.
-    :param message: Message data, default to None.
+    :param message: Message data, default to ``None``.
     :type message: str.
-    :param message_hash: Message data hash, default to None.
+    :param message_hash: Message data hash, default to ``None``.
     :type message_hash: str.
 
     :return: str -- XinFin signed message or signature.
@@ -261,9 +261,9 @@ def verify(public_key: str, signature: str, message: Optional[str] = None, messa
     :type public_key: str.
     :param signature: Signed message data.
     :type signature: str.
-    :param message: Message data, default to None.
+    :param message: Message data, default to ``None``.
     :type message: str.
-    :param message_hash: Message data hash, default to None.
+    :param message_hash: Message data hash, default to ``None``.
     :type message_hash: str.
 
     :return: bool -- Verified signature.

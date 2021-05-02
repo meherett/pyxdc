@@ -52,7 +52,7 @@ config: dict = config
 
 class Wallet:
     """
-    XinFin Wallet
+    XinFin Wallet.
 
     :param provider: XinFin provider, default to ``HTTP_PROVIDER``.
     :type provider: HTTPProvider, WebsocketProvider
@@ -875,11 +875,14 @@ class Wallet:
         raw = __unhexlify__(config["wif"]) + self._key.to_string() + b"\x01"
         return check_encode(raw)
 
-    def balance(self) -> int:
+    def balance(self, unit: str = "Wei") -> Union[int, float]:
         """
         Get XinFin wallet balance.
 
-        :return: int -- XinFin balance (Wei).
+        :param unit: XinFIn unit, default to ``Wei``.
+        :type unit: str
+
+        :return: int, float -- XinFin balance (XDC, Gwei, Wei).
 
         >>> from pyxdc import HTTP_PROVIDER
         >>> from pyxdc.wallet import Wallet
@@ -890,7 +893,7 @@ class Wallet:
         2450000000
         """
 
-        return get_balance(address=self.address(), provider=self._provider)
+        return get_balance(address=self.address(), provider=self._provider, unit=unit)
 
     def sign(self, message: Optional[str] = None, message_hash: Optional[str] = None) -> str:
         """
