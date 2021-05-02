@@ -3,7 +3,7 @@
 from pyxdc import HTTP_PROVIDER
 from pyxdc.wallet import Wallet
 from pyxdc.utils import (
-    generate_mnemonic, amount_unit_converter, is_mnemonic
+    generate_mnemonic, is_mnemonic
 )
 from typing import Optional
 
@@ -16,7 +16,7 @@ LANGUAGE: str = "chinese_simplified"  # Default is english
 # Generate new mnemonic words
 MNEMONIC: str = generate_mnemonic(language=LANGUAGE, strength=STRENGTH)
 # Secret passphrase for mnemonic words
-PASSPHRASE: Optional[str] = None  # str("meherett")
+PASSPHRASE: Optional[str] = None  # "meherett"
 
 # Check mnemonic words
 assert is_mnemonic(mnemonic=MNEMONIC, language=LANGUAGE)
@@ -61,13 +61,13 @@ print("Semantic:", wallet.semantic())
 print("Path:", wallet.path())
 print("Hash:", wallet.hash())
 print("Address:", wallet.address())
-print("Balance:", amount_unit_converter(amount=wallet.balance(), unit="Wei2XDC"), "XDC")
+print("Balance:", wallet.balance(unit="XDC"), "XDC")
 
 print("-------- Sign & Verify --------")
 
-MESSAGE: str = "1246b84985e1ab5f83f4ec2bdf271114666fd3d9e24d12981a3c861b9ed523c6"
+MESSAGE: str = "Hello Meheret :)"
 
 print("Message:", MESSAGE)
 signature: str = wallet.sign(message=MESSAGE)
 print("Signature:", signature)
-print("Verified:", wallet.verify(message=MESSAGE, signature=signature))
+print("Verified:", wallet.verify(signature=signature, message=MESSAGE))

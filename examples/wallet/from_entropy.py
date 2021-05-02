@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-from pyxdc import Wallet
-from pyxdc.providers import HTTP_PROVIDER
+from pyxdc import HTTP_PROVIDER
+from pyxdc.wallet import Wallet
 from pyxdc.utils import generate_entropy
 from typing import Optional
 
@@ -13,12 +13,12 @@ STRENGTH: int = 160  # Default is 128
 LANGUAGE: str = "english"  # Default is english
 # Generate new entropy hex string
 ENTROPY: str = "b64dc1c3c3d5b876a94006d49c1e4ed2f106b86e"  # generate_entropy(strength=STRENGTH)
-# Secret passphrase for mnemonic
-PASSPHRASE: Optional[str] = None  # "meherett"
+# Secret passphrase for mnemonic words
+PASSPHRASE: Optional[str] = None  # str("meherett")
 
 # Initialize XinFin mainnet Wallet
 wallet: Wallet = Wallet(provider=HTTP_PROVIDER)
-# Get XinFin Wallet from entropy
+# Get XinFin Wallet from entropy hex string
 wallet.from_entropy(
     entropy=ENTROPY, language=LANGUAGE, passphrase=PASSPHRASE
 )
@@ -56,13 +56,13 @@ print("Semantic:", wallet.semantic())
 print("Path:", wallet.path())
 print("Hash:", wallet.hash())
 print("Address:", wallet.address())
-print("Balance:", wallet.balance())
+print("Balance:", wallet.balance(unit="XDC"), "XDC")
 
 print("-------- Sign & Verify --------")
 
-MESSAGE: str = "1246b84985e1ab5f83f4ec2bdf271114666fd3d9e24d12981a3c861b9ed523c6"
+MESSAGE_HASH: str = "34482808c8f9e9c78b9ba295438160cc5f1cc24d5bfd992aaef0602319cb379b"
 
-print("Message:", MESSAGE)
-signature: str = wallet.sign(message=MESSAGE)
+print("Message Hash:", MESSAGE_HASH)
+signature: str = wallet.sign(message_hash=MESSAGE_HASH)
 print("Signature:", signature)
-print("Verified:", wallet.verify(message=MESSAGE, signature=signature))
+print("Verified:", wallet.verify(signature=signature, message_hash=MESSAGE_HASH))

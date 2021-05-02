@@ -35,9 +35,9 @@ print("Balance:", amount_unit_converter(amount=wallet.balance(), unit="Wei2XDC")
 
 print("-------- Sign & Verify --------")
 
-MESSAGE: str = "1246b84985e1ab5f83f4ec2bdf271114666fd3d9e24d12981a3c861b9ed523c6"
+MESSAGE_HASH: str = "34482808c8f9e9c78b9ba295438160cc5f1cc24d5bfd992aaef0602319cb379b"
 
-print("Message:", MESSAGE)
-signature: str = wallet.sign(message=MESSAGE)
+print("Message Hash:", MESSAGE_HASH)
+signature: str = wallet.sign(message_hash=MESSAGE_HASH)
 print("Signature:", signature)
-print("Verified:", wallet.verify(message=MESSAGE, signature=signature))
+print("Verified:", wallet.verify(signature=signature, message_hash=MESSAGE_HASH))
