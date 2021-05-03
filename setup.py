@@ -32,8 +32,8 @@ setup(
             "pytest-cov>=2.11.1,<3"
         ],
         "docs": [
-            "sphinx>=3.5.3,<4",
-            "sphinx-rtd-theme>=0.5.1,<1"
+            "sphinx>=3.5.4,<4",
+            "sphinx-rtd-theme>=0.5.2,<1"
         ]
     },
     classifiers=[
