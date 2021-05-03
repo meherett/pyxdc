@@ -3,7 +3,7 @@
 import json
 import os
 
-from pyxdc import WEBSOCKET_PROVIDER
+from pyxdc import HTTP_PROVIDER
 from pyxdc.transaction import ContractTransaction
 from pyxdc.utils import amount_unit_converter
 from pyxdc.wallet import Wallet
@@ -65,7 +65,7 @@ ABI: list = [
 def test_contract_transaction():
 
     wallet: Wallet = Wallet(
-        provider=WEBSOCKET_PROVIDER
+        provider=HTTP_PROVIDER
     ).from_entropy(
         entropy=_["wallet"]["entropy"],
         passphrase=_["wallet"]["passphrase"],
@@ -75,7 +75,7 @@ def test_contract_transaction():
     )
 
     contract_transaction: ContractTransaction = ContractTransaction(
-        provider=WEBSOCKET_PROVIDER
+        provider=HTTP_PROVIDER
     )
 
     contract_transaction.build_transaction(

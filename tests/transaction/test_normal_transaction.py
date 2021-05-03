@@ -3,7 +3,7 @@
 import json
 import os
 
-from pyxdc import WEBSOCKET_PROVIDER
+from pyxdc import HTTP_PROVIDER
 from pyxdc.transaction import NormalTransaction
 from pyxdc.utils import amount_unit_converter
 from pyxdc.wallet import Wallet
@@ -19,7 +19,7 @@ values.close()
 def test_normal_transaction():
 
     wallet: Wallet = Wallet(
-        provider=WEBSOCKET_PROVIDER
+        provider=HTTP_PROVIDER
     ).from_entropy(
         entropy=_["wallet"]["entropy"],
         passphrase=_["wallet"]["passphrase"],
@@ -29,7 +29,7 @@ def test_normal_transaction():
     )
 
     normal_transaction: NormalTransaction = NormalTransaction(
-        provider=WEBSOCKET_PROVIDER
+        provider=HTTP_PROVIDER
     )
 
     normal_transaction.build_transaction(
