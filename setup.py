@@ -6,11 +6,11 @@ from setuptools import (
 
 # README.md
 with open("README.md", "r", encoding="utf-8") as readme:
-    long_description = readme.read()
+    long_description: str = readme.read()
 
 # requirements.txt
 with open("requirements.txt", "r") as _requirements:
-    requirements = list(map(str.strip, _requirements.read().split("\n")))
+    requirements: list = list(map(str.strip, _requirements.read().split("\n")))
 
 setup(
     name="pyxdc",
