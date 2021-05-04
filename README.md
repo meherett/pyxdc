@@ -1,6 +1,6 @@
 # PyXDC
 
-[![Build Status](https://travis-ci.org/meherett/pyxdc.svg?branch=master)](https://travis-ci.org/meherett/pyxdc?branch=master)
+[![Build Status](https://travis-ci.com/meherett/pyxdc.svg?branch=master)](https://travis-ci.org/meherett/pyxdc?branch=master)
 [![PyPI Version](https://img.shields.io/pypi/v/pyxdc.svg?color=blue)](https://pypi.org/project/pyxdc)
 [![Documentation Status](https://readthedocs.org/projects/pyxdc/badge/?version=master)](https://pyxdc.readthedocs.io/en/master/?badge=master)
 [![PyPI Python Version](https://img.shields.io/pypi/pyversions/pyxdc.svg)](https://pypi.org/project/pyxdc)
