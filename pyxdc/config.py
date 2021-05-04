@@ -17,6 +17,7 @@ config: dict = {
           endpoint_uri="wss://ws.xinfin.network"
       )
     },
+    "endpoint": "https://explorer.xinfin.network",
     "timeout": 60,
     "gas_price": 250_000_000,  # 0.25 Gwei
     "units": {
