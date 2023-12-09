@@ -14,13 +14,13 @@ with open("requirements.txt", "r") as _requirements:
 
 setup(
     name="pyxdc",
-    version="0.1.1",
+    version="0.2.0",
     description="Python library with tools for XinFin blockchain.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     license="MIT",
-    author="Meheret Tesfaye",
-    author_email="meherett@zoho.com",
+    author="Meheret Tesfaye Batu",
+    author_email="meherett.batu@gmail.com",
     url="https://github.com/meherett/pyxdc",
     keywords=["xinfin", "wallet", "protocol", "blockchain"],
     python_requires=">=3.6,<4",
@@ -28,8 +28,8 @@ setup(
     install_requires=requirements,
     extras_require={
         "tests": [
-            "pytest>=6.2.3,<7",
-            "pytest-cov>=2.11.1,<3"
+            "pytest>=7.4.3,<8",
+            "pytest-cov>=4.1.0,<5"
         ],
         "docs": [
             "sphinx>=3.5.4,<4",
