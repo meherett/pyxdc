@@ -23,7 +23,7 @@ class Account(str):
         return obj
 
     def transfer(self, address: str, value: int):
-        self.web3.eth.sendTransaction(transaction={
+        self.web3.eth.send_transaction(transaction={
             "to": to_checksum_address(address=address, prefix="0x"), "from": self.address, "value": value
         })
 

@@ -198,7 +198,7 @@ class ContractTransaction(Transaction):
         if gas is not None:
             self.transaction.GAS = gas
         elif not gas and estimate_gas:
-            self.transaction.GAS = constructed_contact.estimateGas(**kwargs)
+            self.transaction.GAS = constructed_contact.estimate_gas(**kwargs)
         else:
             raise ValueError("Gas is required, or set true estimate gas.")
         self.transaction.DATA = constructed_contact.__dict__.get("data_in_transaction")
@@ -323,7 +323,7 @@ class NormalTransaction(Transaction):
         if gas is not None:
             self.transaction.GAS = gas
         elif not gas and estimate_gas:
-            self.transaction.GAS = self.web3.eth.estimateGas({
+            self.transaction.GAS = self.web3.eth.estimate_gas({
                     "from": self.transaction.FROM,
                     "to": self.transaction.TO,
                     "value": self.transaction.VALUE

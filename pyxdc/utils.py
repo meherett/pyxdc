@@ -195,9 +195,9 @@ def is_address(address: str) -> bool:
     if not isinstance(address, str):
         raise TypeError("Address must be string format")
     elif address.startswith("xdc"):
-        return Web3.isAddress(f"0x{address.replace('xdc', '', 1)}")
+        return Web3.is_address(f"0x{address.replace('xdc', '', 1)}")
     elif address.startswith("0x"):
-        return Web3.isAddress(address)
+        return Web3.is_address(address)
     return False
 
 
@@ -220,9 +220,9 @@ def is_checksum_address(address: str) -> bool:
     if not isinstance(address, str):
         raise TypeError("Address must be string format")
     elif address.startswith("xdc"):
-        return Web3.isChecksumAddress(f"0x{address.replace('xdc', '', 1)}")
+        return Web3.is_checksum_address(f"0x{address.replace('xdc', '', 1)}")
     elif address.startswith("0x"):
-        return Web3.isAddress(address)
+        return Web3.is_checksum_address(address)
     return False
 
 
@@ -246,9 +246,9 @@ def to_checksum_address(address: str, prefix: str = "xdc") -> str:
         raise AddressError("Invalid XinFin address.")
 
     if address.startswith("xdc"):
-        checksum_address: str = Web3.toChecksumAddress(f"0x{address.replace('xdc', '', 1)}")
+        checksum_address: str = Web3.to_checksum_address(f"0x{address.replace('xdc', '', 1)}")
     elif address.startswith("0x"):
-        checksum_address: str = Web3.toChecksumAddress(address)
+        checksum_address: str = Web3.to_checksum_address(address)
     else:
         raise AddressError("Invalid XinFin address prefix.")
 
@@ -291,14 +291,14 @@ def decode_transaction_raw(transaction_raw: str) -> dict:
 
     transaction = rlp.decode(hex_to_bytes(transaction_raw), Transaction)
     decoded_transaction: dict = {
-        "hash": Web3.toHex(keccak(hex_to_bytes(transaction_raw))),
+        "hash": Web3.to_hex(keccak(hex_to_bytes(transaction_raw))),
         "from": w3.eth.account.recover_transaction(transaction_raw),
-        "to": (w3.toChecksumAddress(transaction.to) if transaction.to else None),
+        "to": (w3.to_checksum_address(transaction.to) if transaction.to else None),
         "nonce": transaction.nonce,
         "gas": transaction.gas,
         "gas_price": transaction.gas_price,
         "value": transaction.value,
-        "data": w3.toHex(transaction.data),
+        "data": w3.to_hex(transaction.data),
         "chain_id": ((transaction.v - 35) // 2 if transaction.v % 2 else (transaction.v - 36) // 2),
         "r": hex(transaction.r),
         "s": hex(transaction.s),
